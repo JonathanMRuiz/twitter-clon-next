@@ -15,9 +15,9 @@ import {
 } from "@heroicons/react/outline";
 const Sidebar = () => {
   const styles = {
-    container:
-      "hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full ",
-    logo: "flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24",
+    sidebar:
+      "hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2  h-full fixed",
+    logo: "flex items-center justify-center w-14 h-14  hoverAnimation p-0 xl:ml-24",
     sidebarLink: "space-y-2.5 mt-4 mb-2.5 xl:ml-24",
     button:
       "hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]",
@@ -26,7 +26,7 @@ const Sidebar = () => {
       "text-[#d9d9d9] flex items-center justify-center hoverAnimation xl:ml-auto  mt-auto",
   };
   return (
-    <div className={styles.container}>
+    <div className={styles.sidebar}>
       <div className={styles.logo}>
         <Image src="https://rb.gy/ogau5a" width={30} height={30} alt="logo" />
       </div>
