@@ -21,6 +21,7 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="flex bg-[#000] min-h-screen max-w-[1500px] mx-auto">
         <Sidebar />
         <Feed />
+        {session.user.name}
         {/* Widgets */}
         {/* Modal */}
       </main>
@@ -39,14 +40,14 @@ export async function getServerSideProps(context) {
 
   const providers = await getProviders();
 
-  //const session = await getSession(context);
+  const session = await getSession(context);
 
   return {
     props: {
       trendingResults,
       followResults,
       providers,
-      //session,
+      session,
     },
   };
 }
