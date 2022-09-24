@@ -1,6 +1,7 @@
 import { SparklesIcon } from "@heroicons/react/outline";
 import React from "react";
 import Input from "./Input";
+import { useSession } from "next-auth/react";
 
 const Feed = () => {
   const styles = {

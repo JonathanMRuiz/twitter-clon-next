@@ -18,6 +18,7 @@ import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { useSession } from "next-auth/react";
 
 const Input = () => {
   const [input, setInput] = useState("");
@@ -25,6 +26,8 @@ const Input = () => {
   const [showEmojis, setShowEmojis] = useState(false);
   const [loading, setLoading] = useState(false);
   const filePickerRef = useRef();
+  const { data: session } = useSession();
+  const img = session.user.image;
 
   const addEmoji = (e) => {
     let sym = e.unified.split("-");
@@ -44,10 +47,10 @@ const Input = () => {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, "posts"), {
-      // id: sessionStorage.user.uid,
-      // username: sessionStorage.user.name,
-      // userImg: sessionStorage.user.image,
-      // tag: session.user.tag,
+      id: session.user.uid,
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user.tag,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -91,11 +94,7 @@ const Input = () => {
   };
   return (
     <div className={styles.input}>
-      <img
-        src="https://lh3.googleusercontent.com/ogw/AOh-ky19idCjNEsJE5dj3k9zQXeaYDu3-YB-vs6Htwkh=s32-c-mo"
-        alt=""
-        className={styles.img}
-      />
+      <img src={img} alt="" className={styles.img} />
       <div className={styles.textarea}>
         <div className={`${selectedFile && "pb-7 "} ${input && "space-y-2.5"}`}>
           <textarea

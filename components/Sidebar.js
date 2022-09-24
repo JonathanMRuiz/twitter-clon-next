@@ -13,7 +13,13 @@ import {
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
+
+import { signOut, useSession } from "next-auth/react";
+
 const Sidebar = () => {
+  const { data: session } = useSession();
+
+  const img = session.user.image;
   const styles = {
     sidebar:
       "hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2  h-full fixed",
@@ -41,15 +47,11 @@ const Sidebar = () => {
         <SidebarLink text="More" Icon={DotsCircleHorizontalIcon} />
       </div>
       <button className={styles.button}>Tweet</button>
-      <div className={styles.userContainer}>
-        <img
-          src="https://lh3.googleusercontent.com/ogw/AOh-ky19idCjNEsJE5dj3k9zQXeaYDu3-YB-vs6Htwkh=s32-c-mo"
-          alt="image"
-          className={styles.img}
-        />
+      <div className={styles.userContainer} onClick={signOut}>
+        <img src={img} alt="image" className={styles.img} />
         <div className="hidden xl:inline leading-5">
-          <h4 className="font-bold">firebase 1875</h4>
-          <p className="text-[#6e767d]">@firebase1875</p>
+          <h4 className="font-bold">{session.user.name}</h4>
+          <p className="text-[#6e767d]">@{session.user.tag}</p>
         </div>
         <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
       </div>
