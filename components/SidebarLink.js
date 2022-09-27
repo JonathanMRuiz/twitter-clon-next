@@ -1,18 +1,18 @@
-import React from "react";
+import { useRouter } from "next/router";
 
-const SidebarLink = ({ text, Icon, active }) => {
-  const styles = {
-    container: `text-[#d9d9d9] flex items-center justify-center xl:justify-start text-xl space-x-3 hoverAnimation ${
-      active && "font-bold"
-    }`,
-    text: "hidden xl:inline",
-  };
+function SidebarLink({ Icon, text, active }) {
+  const router = useRouter();
   return (
-    <div className={styles.container}>
+    <div
+      className={`text-[#d9d9d9] flex items-center justify-center xl:justify-start text-xl space-x-3 hoverAnimation ${
+        active && "font-bold"
+      }`}
+      onClick={() => active && router.push("/")}
+    >
       <Icon className="h-7" />
-      <span className={styles.text}>{text}</span>
+      <span className="hidden xl:inline">{text}</span>
     </div>
   );
-};
+}
 
 export default SidebarLink;
