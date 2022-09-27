@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions = {
+export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -10,7 +10,6 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-
   callbacks: {
     async session({ session, token }) {
       session.user.tag = session.user.name
@@ -19,10 +18,8 @@ export const authOptions = {
         .toLocaleLowerCase();
 
       session.user.uid = token.sub;
-
       return session;
     },
   },
-};
-
-export default NextAuth(authOptions);
+  secret: process.env.JWT_SECRET,
+});
